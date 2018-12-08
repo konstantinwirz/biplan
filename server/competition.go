@@ -103,5 +103,5 @@ func kmToDistance(km string) uint32 {
 		return 0
 	}
 
-	return uint32(value) * 1000
+	return uint32(value * 1000)
 }
