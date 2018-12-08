@@ -76,7 +76,7 @@ func fetchEvents(season string) ([]*Event, error) {
 	var sourceEvents []SourceEvent
 	err = json.Unmarshal(body, &sourceEvents)
 	if err != nil {
-		log.Printf("failed to unmarshal: %v", err)
+		log.Printf("failed to unmarshal events: %v", err)
 		return nil, err
 	}
 

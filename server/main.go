@@ -13,5 +13,13 @@ func main() {
 
 	for _, event := range events {
 		fmt.Printf("%v\n", event)
+		// get competitions
+		competitions, err := fetchCompetitions(event.ID)
+		if err != nil {
+			log.Fatalf("failed to fetch competions for event '%s': %v", event.ID, err)
+		}
+		for _, comp := range competitions {
+			fmt.Printf("%v\n", comp)
+		}
 	}
 }
