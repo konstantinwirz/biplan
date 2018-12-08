@@ -6,7 +6,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"strconv"
 	"time"
 )
 
@@ -39,7 +38,7 @@ type Competition struct {
 	Name      string
 	RaceID    string
 	StartTime time.Time
-	Distance  uint32 // distance in meters
+	Distance  string
 	Completed bool
 }
 
@@ -84,24 +83,10 @@ func fetchCompetitions(eventID string) ([]*Competition, error) {
 			Name:      src.Description,
 			RaceID:    src.RaceID,
 			StartTime: src.StartTime,
-			Distance:  kmToDistance(src.KM),
+			Distance:  src.KM,
 			Completed: src.StatusID == 11,
 		}
 	}
 
 	return competitions, nil
-}
-
-func kmToDistance(km string) uint32 {
-	if km == "" { // empty distance, probably a qualification
-		return 0
-	}
-
-	value, err := strconv.ParseFloat(km, 64)
-	if err != nil {
-		log.Printf("failed to convert %s to meters: %v", km, err)
-		return 0
-	}
-
-	return uint32(value * 1000)
 }

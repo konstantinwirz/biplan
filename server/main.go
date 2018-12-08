@@ -20,6 +20,11 @@ func main() {
 		}
 		for _, comp := range competitions {
 			fmt.Printf("%v\n", comp)
+			race, err := fetchRace(comp.RaceID)
+			if err != nil {
+				log.Fatalf("failed to fetch race information for race id '%s': %v", comp.RaceID, err)
+			}
+			log.Printf("%v\n", race)
 		}
 	}
 }
