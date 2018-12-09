@@ -44,7 +44,7 @@ type Competition struct {
 
 // String implements Stringer interface
 func (c Competition) String() string {
-	return fmt.Sprintf("Competition {name = %s raceId = %s startTime = %v distance = %d completed = %v}",
+	return fmt.Sprintf("Competition {name = %s raceId = %s startTime = %v distance = %s completed = %v}",
 		c.Name, c.RaceID, c.StartTime, c.Distance, c.Completed)
 }
 

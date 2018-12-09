@@ -36,7 +36,7 @@ func mustMarshal(v interface{}) []byte {
 }
 
 func competitionHandler(w http.ResponseWriter, r *http.Request) {
-	eventID := mux.Vars(r)["eventId"]
+	eventID := mux.Vars(r)["id"]
 	competitions, err := fetchCompetitions(eventID)
 	if err != nil {
 		writeError(w, err.Error())
@@ -48,7 +48,7 @@ func competitionHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func raceHandler(w http.ResponseWriter, r *http.Request) {
-	raceID := mux.Vars(r)["raceId"]
+	raceID := mux.Vars(r)["id"]
 	races, err := fetchRace(raceID)
 	if err != nil {
 		writeError(w, err.Error())
@@ -59,11 +59,23 @@ func raceHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(mustMarshal(races))
 }
 
+func athleteHandler(w http.ResponseWriter, r *http.Request) {
+	athleteID := mux.Vars(r)["id"]
+	athlete, err := fetchAthlete(athleteID)
+	if err != nil {
+		writeError(w, err.Error())
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(mustMarshal(athlete))
+}
+
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/v1/events/{season}", eventHandler).Methods("GET")
-	r.HandleFunc("/v1/competitions/{eventId}", competitionHandler).Methods("GET")
-	r.HandleFunc("/v1/races/{raceId}", raceHandler).Methods("GET")
+	r.HandleFunc("/v1/competitions/{id}", competitionHandler).Methods("GET")
+	r.HandleFunc("/v1/races/{id}", raceHandler).Methods("GET")
+	r.HandleFunc("/v1/athletes/{id}", athleteHandler).Methods("GET")
 	http.Handle("/", r)
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("failed to start a http server: %v", err)

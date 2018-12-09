@@ -16,7 +16,7 @@ http GET https://biathlonresults.com/modules/sportapi/api/Results?RaceId=BT1819S
 http GET https://biathlonresults.com/modules/sportapi/api/Cups?SeasonId=1819
 
 
-5. How to get the bio of a sprotsman
+5. How to get the bio of an athlete
 
 https://biathlonresults.com/modules/sportapi/api/CISBios?IBUId=BTSVK11005198301
 
