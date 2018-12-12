@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Select, ItemPredicate, ItemRenderer } from '@blueprintjs/select'
 import { MenuItem, Button } from '@blueprintjs/core';
-
-
-// all available seasons
-export const availableSeasons: Season[] = [
-    { id: "1819", displayName: "2018/2019" },
-    { id: "1718", displayName: "2017/2018" },
-    { id: "1617", displayName: "2016/2017" },
-];
+import Season, { availableSeasons } from '../../model/Season';
+import Store from 'src/store/types';
+import { SeasonAction } from 'src/store/actions';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
 
 const SelectComponent = Select.ofType<Season>();
 
@@ -40,7 +37,20 @@ interface State {
     season: Season
 }
 
-export default class SeasonSelect extends React.PureComponent<Props, State> {
+
+function mapStateToProps({season}: Store) {
+    return {
+        season
+    }   
+}
+
+function mapDispatchToProps(dispatch: Dispatch<SeasonAction>) {
+    return {
+
+    }
+}
+
+class SeasonSelect extends React.PureComponent<Props, State> {
 
     constructor(props: Props) {
         super(props);
@@ -69,3 +79,5 @@ export default class SeasonSelect extends React.PureComponent<Props, State> {
     }
     
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SeasonSelect);

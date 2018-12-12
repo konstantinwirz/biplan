@@ -1,20 +1,24 @@
 import * as React from 'react';
-import { Navbar, Alignment } from '@blueprintjs/core'
-import SeasonSelect from './SeasonSelect';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import { changeSeason } from 'src/store/reducers';
+import { availableSeasons } from '../model/Season';
 import './App.css';
+import Header from './Header';
+
+
+// create a redux store
+const store = createStore(changeSeason, {
+  season: availableSeasons[0]
+})
+
 
 class App extends React.Component {
   public render() {
     return (
-      <Navbar className="bp3-dark">
-        <Navbar.Group align={Alignment.LEFT}>
-          <Navbar.Heading>BIPLAN</Navbar.Heading>
-        </Navbar.Group>
-        <Navbar.Group align={Alignment.RIGHT}>
-          <Navbar.Divider />
-          <SeasonSelect />
-        </Navbar.Group>
-      </Navbar>
+      <Provider store={store}>
+        <Header />
+      </Provider>
     );
   }
 }
