@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -77,7 +78,7 @@ func main() {
 	r.HandleFunc("/v1/races/{id}", raceHandler).Methods("GET")
 	r.HandleFunc("/v1/athletes/{id}", athleteHandler).Methods("GET")
 	http.Handle("/", r)
-	if err := http.ListenAndServe(":8080", nil); err != nil {
+	if err := http.ListenAndServe(":8080", handlers.CORS()(r)); err != nil {
 		log.Fatalf("failed to start a http server: %v", err)
 	}
 }
