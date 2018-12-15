@@ -1,83 +1,70 @@
+import { FormControl, MenuItem, Select } from "@material-ui/core";
 import * as React from 'react';
-import { Select, ItemPredicate, ItemRenderer } from '@blueprintjs/select'
-import { MenuItem, Button } from '@blueprintjs/core';
-import Season, { availableSeasons } from '../../model/Season';
-import Store from 'src/store/types';
-import { SeasonAction } from 'src/store/actions';
-import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { changeSeason, SeasonAction } from 'src/store/actions';
+import { availableSeasons, Season, seasonById } from '../../model';
+import Store from '../../store/types';
 
-const SelectComponent = Select.ofType<Season>();
-
-const predicate: ItemPredicate<Season> = (query, season) => {
-    return season.displayName.indexOf(query) >= 0;
-};
-
-const render: ItemRenderer<Season> = (season, { handleClick, modifiers }) => {
-    if (!modifiers.matchesPredicate) {
-        return null;
-    }
-
-    return (
-        <MenuItem
-            active={modifiers.active}
-            key={season.id}
-            label={season.displayName}
-            onClick={handleClick}
-            text={season.displayName}
-        />
-    );
-}
 
 interface Props {
-
+    onSeasonChanged: (event: React.ChangeEvent<HTMLSelectElement>) => void
+    season: Season;
 }
 
-interface State {
-    season: Season
-}
-
-
-function mapStateToProps({season}: Store) {
+function mapStateToProps({ season }: Store) {
     return {
         season
-    }   
+    }
 }
 
 function mapDispatchToProps(dispatch: Dispatch<SeasonAction>) {
     return {
-
+        onSeasonChanged: (event: React.ChangeEvent<HTMLSelectElement>) =>
+            dispatch(changeSeason(seasonById(event.target.value)!))
     }
 }
 
-class SeasonSelect extends React.PureComponent<Props, State> {
 
-    constructor(props: Props) {
-        super(props);
-        this.state = {
-            season: availableSeasons[0]
-        };
-    }
-
-    selectSeason = (season: Season): void => {
-        this.setState({
-            season
-        });
-    }
-
-    render() {
-        const { season } = this.state
-        return (
-            <SelectComponent
-                items={availableSeasons}
-                itemRenderer={render}
-                itemPredicate={predicate}
-                onItemSelect={this.selectSeason}>
-                <Button text={season.displayName} rightIcon="double-caret-vertical" />
-            </SelectComponent>
-        )
-    }
+const SeasonSelect = ({onSeasonChanged, season}: Props) => {
     
-}
+    return (
+        <FormControl>
+            <Select
+                displayEmpty={true}
+                value={season.id}
+                onChange={onSeasonChanged}>
+
+                {
+                    availableSeasons.map(season =>
+                        <MenuItem key={season.id} value={season.id} name={season.displayName} >
+                            {season.displayName}
+                        </MenuItem>
+                    )
+                }
+            </Select>
+        </FormControl>
+    );
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeasonSelect);
+
+
+/*
+
+
+
+const SeasonSelect = ({ season, onSeasonChanged }: Props) => {
+    return (
+        <SelectComponent
+            items={availableSeasons}
+            itemRenderer={render}
+            itemPredicate={predicate}
+            onItemSelect={onSeasonChanged}>
+            <Button text={season.displayName} rightIcon="double-caret-vertical" />
+        </SelectComponent>
+    )
+};
+
+
+*/

@@ -1,20 +1,43 @@
+import AppBar from '@material-ui/core/AppBar';
+import IconButton from '@material-ui/core/IconButton';
+import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
 import * as React from 'react';
-import { Navbar, Alignment } from '@blueprintjs/core'
 import SeasonSelect from '../SeasonSelect';
 
 
-const Header = () => {
-    return (
-        <Navbar className="bp3-dark">
-            <Navbar.Group align={Alignment.LEFT}>
-                <Navbar.Heading>BIPLAN</Navbar.Heading>
-            </Navbar.Group>
-            <Navbar.Group align={Alignment.RIGHT}>
-                <Navbar.Divider />
-                <SeasonSelect />
-            </Navbar.Group>
-            </Navbar>
-    );
+const styles = createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    grow: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginLeft: -12,
+      marginRight: 20,
+    },
+  });
+  
+
+const Header = (props: WithStyles<typeof styles>) => {
+    const { classes } = props;
+
+  return (
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit" className={classes.grow}>
+            BIPLAN
+          </Typography>
+          <SeasonSelect />
+        </Toolbar>
+      </AppBar>
+  );
 };
 
-export default Header;
+export default withStyles(styles)(Header);

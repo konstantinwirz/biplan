@@ -20,15 +20,15 @@ func getEventsURL(season string) string {
 
 // Event represents an IBU Event
 type Event struct {
-	ID        string
-	Name      string
-	Level     uint8
-	Country   string
-	Organizer string
-	Season    string
-	StartTime time.Time
-	EndTime   time.Time
-	UTCOffset int8
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	Level     uint8     `json:"level"`
+	Country   string    `json:"country"`
+	Organizer string    `json:"organizer"`
+	Season    string    `json:"season"`
+	StartTime time.Time `json:"startTime"`
+	EndTime   time.Time `json:"endTime"`
+	UTCOffset int8      `json:"utcOffset"`
 }
 
 // String implements Stringer interface

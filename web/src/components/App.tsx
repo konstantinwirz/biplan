@@ -2,25 +2,23 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { changeSeason } from 'src/store/reducers';
-import { availableSeasons } from '../model/Season';
-import './App.css';
+import { initialSeason } from '../model';
 import Header from './Header';
+import Index from './Index';
 
 
 // create a redux store
 const store = createStore(changeSeason, {
-  season: availableSeasons[0]
+  season: initialSeason
 })
 
-
-class App extends React.Component {
-  public render() {
-    return (
-      <Provider store={store}>
-        <Header />
-      </Provider>
-    );
-  }
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Header />
+      <Index />
+    </Provider>
+  );
 }
 
 export default App;

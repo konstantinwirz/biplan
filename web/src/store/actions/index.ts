@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 import * as constants from '../constants';
-import Season from '../../model/Season';
+import {Season} from '../../model';
 
 export interface ChangeSeasonAction extends Action {
     type: constants.SEASON_CHANGED
