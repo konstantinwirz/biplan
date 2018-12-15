@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { changeSeason } from 'src/store/reducers';
+import { HashRouter as Router, Route } from "react-router-dom";
+import { changeSeason } from '../store/reducers';
 import { initialSeason } from '../model';
 import Header from './Header';
 import Index from './Index';
+import Events from './Events';
 
 
 // create a redux store
@@ -14,10 +16,13 @@ const store = createStore(changeSeason, {
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <Header />
-      <Index />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <Header />
+        <Route exact={true} path="/" component={Index} />
+        <Route path="/events/:id" component={Events} />
+      </Provider>
+    </Router>
   );
 }
 

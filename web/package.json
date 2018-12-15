@@ -8,6 +8,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
     "redux": "^4.0.1",
     "typeface-roboto": "0.0.54"
@@ -19,12 +20,14 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "@types/material-ui": "^0.21.5",
     "@types/jest": "^23.3.10",
+    "@types/material-ui": "^0.21.5",
     "@types/node": "^10.12.12",
     "@types/react": "^16.7.13",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.11",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
     "typescript": "^3.2.2"
   }
 }
