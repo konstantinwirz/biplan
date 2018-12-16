@@ -35,11 +35,11 @@ type SourceCompetition struct {
 // Competition is an internal representation
 // of an IBU competition
 type Competition struct {
-	Name      string
-	RaceID    string
-	StartTime time.Time
-	Distance  string
-	Completed bool
+	Name      string    `json:"name"`
+	RaceID    string    `json:"raceId"`
+	StartTime time.Time `json:"startTime"`
+	Distance  string    `json:"distance"`
+	Completed bool      `json:"completed"`
 }
 
 // String implements Stringer interface
