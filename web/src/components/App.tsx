@@ -8,6 +8,7 @@ import Events from './Events';
 import Header from './Header';
 import Seasons from './Seasons';
 import Competitions from './Competitions';
+import Races from './Races';
 
 
 // create a redux store
@@ -24,6 +25,7 @@ const App = () => {
           <Route exact={true} path="/" component={Seasons} />
           <Route path="/events/:id" component={Events} />
           <Route path="/competitions/:id" component={Competitions} />
+          <Route path="/races/:id" component={Races} />
         </Switch>
       </Provider>
     </Router>

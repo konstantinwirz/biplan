@@ -3,6 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from 'react-router-dom';
+import { availableSeasons } from 'src/model';
 
 
 
@@ -24,9 +25,13 @@ const ListItemLink = ({ to, primary }: ListItemLinkProps) => {
 };
 
 const Seasons = () => {
-    return (
+    return (    
         <List>
-            <ListItemLink to="/events/1718" primary="Season 2017/2018" />
+            {
+                availableSeasons.map(season =>
+                    <ListItemLink key={season.id} to={"/events/" + season.id} primary={"Season " + season.displayName} />
+                )
+            }
         </List>
     );
 }

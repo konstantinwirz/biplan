@@ -6,11 +6,7 @@ export interface Season {
 }
 
 // all available seasons
-export const availableSeasons: Season[] = [
-    { id: "1819", displayName: "2018/2019" },
-    { id: "1718", displayName: "2017/2018" },
-    { id: "1617", displayName: "2016/2017" },
-];
+export const availableSeasons: Season[] = allSeasons();
 
 /**
  * Returns the season for the given id
@@ -24,7 +20,22 @@ export function seasonById(id: string): Season | null {
     }
 
     return found[0];
-} 
+}
+
+function allSeasons(): Season[] {
+    const MAX_YEAR = new Date().getFullYear() - 2000;
+    const MIN_YEAR = 10;
+
+    let seasons: Season[] = []
+    for (let i = MIN_YEAR; i <= MAX_YEAR; ++i) {
+        seasons.push({
+            id: `${i}${i+1}`,
+            displayName: `20${i}/20${i+1}`
+        })
+    }
+
+    return seasons;
+}
 
 export const initialSeason = availableSeasons[0];
 

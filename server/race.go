@@ -58,9 +58,9 @@ type SourceRaceResult struct {
 
 // Race represents a race
 type Race struct {
-	ID        string
-	Completed bool
-	Results   []*RaceResult
+	ID        string        `json:"id"`
+	Completed bool          `json:"completed"`
+	Results   []*RaceResult `json:"results"`
 }
 
 // String implements the Stringer interface
@@ -77,20 +77,20 @@ func (r Race) String() string {
 // RaceResult is result of a
 // single athlete
 type RaceResult struct {
-	StartOrder    uint32
-	ResultOrder   uint32
-	AthleteID     string
-	Name          string
-	ShortName     string
-	Country       string
-	Rank          string
-	Shootings     string
-	ShootingTotal string
-	RunTime       string
-	TotalTime     string
-	StartTime     string
-	Behind        string
-	Result        string
+	StartOrder    uint32 `json:"startOrder"`
+	ResultOrder   uint32 `json:"resultOrder"`
+	AthleteID     string `json:"athleteId"`
+	Name          string `json:"name"`
+	ShortName     string `json:"shortName"`
+	Country       string `json:"country"`
+	Rank          string `json:"rank"`
+	Shootings     string `json:"shootings"`
+	ShootingTotal string `json:"shootingTotal"`
+	RunTime       string `json:"runTime"`
+	TotalTime     string `json:"totalTime"`
+	StartTime     string `json:"startTime"`
+	Behind        string `json:"behind"`
+	Result        string `json:"result"`
 }
 
 // String implements the Stringer interface
