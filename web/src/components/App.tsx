@@ -9,7 +9,7 @@ import Header from './Header';
 import Seasons from './Seasons';
 import Competitions from './Competitions';
 import Races from './Races';
-
+import Athletes from './Athletes';
 
 // create a redux store
 const store = createStore(changeSeason, {
@@ -26,6 +26,7 @@ const App = () => {
           <Route path="/events/:id" component={Events} />
           <Route path="/competitions/:id" component={Competitions} />
           <Route path="/races/:id" component={Races} />
+          <Route path="/athletes/:id" component={Athletes} />
         </Switch>
       </Provider>
     </Router>

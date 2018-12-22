@@ -34,13 +34,13 @@ type SourceAthlete struct {
 
 // Athlete is an IBU athlete
 type Athlete struct {
-	ID       string
-	FullName string
-	Country  string
-	Age      uint8
-	Gender   string
-	PhotoURI string
-	FlagURI  string
+	ID       string `json:"id"`
+	FullName string `json:"fullName"`
+	Country  string `json:"country"`
+	Age      uint8  `json:"age"`
+	Gender   string `json:"gender"`
+	PhotoURI string `json:"photoUri"`
+	FlagURI  string `json:"flagUri"`
 }
 
 func (a Athlete) String() string {
